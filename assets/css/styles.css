@@ -1,0 +1,12 @@
+.post-date{
+    background-color: #f4f4f4;
+    padding: 5px 0;
+}
+
+#blogs a:link{
+    text-decoration: none;
+}
+
+#blogs a .card p:hover{
+    text-decoration: none;
+}
