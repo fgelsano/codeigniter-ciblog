@@ -10,3 +10,18 @@
 #blogs a .card p:hover{
     text-decoration: none;
 }
+
+.pagination .page-link {
+    border-color: #ccc!important;
+    border-radius: 0!important;
+    margin-left: 0px!important;
+    margin-right: 0px!important;
+}
+
+.close:hover {
+    color: red;
+}
+
+.delete-category{
+    display: inline;
+}

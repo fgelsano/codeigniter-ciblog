@@ -3,6 +3,11 @@
     class Categories extends CI_Controller{
         
         public function create(){
+            // Check if logged in
+            if(!$this->session->userdata('loggedin')){
+                redirect('users/login');
+            }
+
             $data['title']  =   'Create Category';
 
             $this->form_validation->set_rules('name', 'Name','required');
@@ -13,6 +18,10 @@
                 $this->load->view('templates/footer');
             } else {
                 $this->category_model->create_category();
+
+                // Set Message Here
+                $this->session->set_flashdata('category_created', 'Category created!');
+
                 redirect('categories');
             }
         }
@@ -35,5 +44,21 @@
             $this->load->view('templates/header');
             $this->load->view('posts/index', $data);
             $this->load->view('templates/footer');
+        }
+
+        public function delete($id){
+            $this->load->model('post_model');
+
+            // Check if logged in
+            if(!$this->session->userdata('loggedin') === 1){
+                redirect('users/login');
+            }
+
+            $this->category_model->delete_category($id);
+            
+            // Set Message Here
+            $this->session->set_flashdata('category_deleted', 'Category deleted!');
+
+            redirect('categories');
         }
     }

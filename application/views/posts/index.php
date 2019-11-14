@@ -3,9 +3,11 @@
         <div class="col-12 col-sm-10 col-md-10">
             <h2><?= $title ?></h2>
         </div>
-        <div class="col-12 col-sm-2 col-md-2">
-            <a href="<?php echo base_url(); ?>posts/create" class="btn btn-success btn-block">Add New Post</a>
-        </div>
+        <?php if($this->session->userdata('loggedin')) : ?>
+            <div class="col-12 col-sm-2 col-md-2">
+                <a href="<?php echo base_url(); ?>posts/create" class="btn btn-success btn-block">Add New Post</a>
+            </div>
+        <?php endif; ?>
     </div>
     <?php foreach($posts as $post) : ?>
         <div class="row my-3 p-3">
@@ -16,17 +18,10 @@
             </div>
             <div class="col-12 col-sm-9 col-md-9 card">
                 <div class="row py-3">
-                    <div class="col-12 col-sm-10 col-md-10">
+                    <div class="col-12 col-sm-12 col-md-12">
                         <a href="<?php echo site_url('/posts/'.$post['slug']); ?>">
                             <h3><?php echo $post['title']; ?></h3>
                         </a>
-                    </div>
-                    <div class="col-12 col-sm-2 col-md-2">
-                        <?php echo form_open('posts/delete/'.$post['id']); ?>
-                            <div class="form-group">
-                                <input type="submit" value="Delete" class="form-control btn btn-danger">
-                            </div>
-                        </form>
                     </div>
                 </div>
                 <p><?php echo word_limiter($post['body'], 75); ?></p>
@@ -34,4 +29,9 @@
             </div>
         </div>
     <?php endforeach; ?>
+    
+    <nav>
+        <?php echo $this->pagination->create_links(); ?>
+    </nav>
+    
 </section>
